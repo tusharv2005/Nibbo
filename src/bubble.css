@@ -1,59 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap');
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* ── Theme variables ── */
 :root {
   --ease-spring: var(--ease-spring);
   --card-bg: #ffffff;
-  --card-border: rgba(0, 0, 0, 0.08);
-  --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+  --card-border: rgba(112, 99, 97, 0.12);
+  --card-shadow: 0 4px 16px rgba(112, 99, 97, 0.12), 0 1px 3px rgba(112, 99, 97, 0.08);
   --card-inset: none;
-  --text-primary: #18181b;
-  --header-color: #374151;
-  --cmd-bg: #f4f4f5;
-  --cmd-border: rgba(0, 0, 0, 0.06);
-  --cmd-color: #374151;
-  --cmd-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
-  --scroll-thumb: rgba(0, 0, 0, 0.15);
-  --scroll-thumb-hover: rgba(0, 0, 0, 0.25);
+  --text-primary: #2d2524;
+  --header-color: #706361;
+  --cmd-bg: #fcfbf9;
+  --cmd-border: rgba(112, 99, 97, 0.08);
+  --cmd-color: #706361;
+  --cmd-shadow: inset 0 1px 2px rgba(112, 99, 97, 0.06);
+  --scroll-thumb: rgba(112, 99, 97, 0.2);
+  --scroll-thumb-hover: rgba(112, 99, 97, 0.35);
   --deny-bg: #ffffff;
-  --deny-color: #52525b;
-  --deny-border: #d1d5db;
-  --deny-hover-bg: #f9fafb;
-  --deny-hover-border: #9ca3af;
+  --deny-color: #706361;
+  --deny-border: rgba(112, 99, 97, 0.15);
+  --deny-hover-bg: #f5f0e6;
+  --deny-hover-border: rgba(112, 99, 97, 0.25);
   --sug-bg: #ffffff;
-  --sug-color: #71717a;
-  --sug-border: #e5e7eb;
-  --sug-hover-bg: #f9fafb;
-  --sug-hover-border: #d1d5db;
-  --sug-hover-color: #374151;
-  --sug-arrow: #9ca3af;
+  --sug-color: #9e908e;
+  --sug-border: rgba(112, 99, 97, 0.10);
+  --sug-hover-bg: #f5f0e6;
+  --sug-hover-border: rgba(112, 99, 97, 0.20);
+  --sug-hover-color: #2d2524;
+  --sug-arrow: #9e908e;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --card-bg: #18181b;
-    --card-border: rgba(255, 255, 255, 0.1);
+    --card-bg: #231f1e;
+    --card-border: rgba(179, 167, 162, 0.15);
     --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     --card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    --text-primary: #f4f4f5;
-    --header-color: #e4e4e7;
-    --cmd-bg: #09090b;
-    --cmd-border: rgba(255, 255, 255, 0.06);
-    --cmd-color: #a1a1aa;
+    --text-primary: #f5ede6;
+    --header-color: #b3a7a2;
+    --cmd-bg: #1a1615;
+    --cmd-border: rgba(179, 167, 162, 0.09);
+    --cmd-color: #b3a7a2;
     --cmd-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-    --scroll-thumb: rgba(255, 255, 255, 0.1);
-    --scroll-thumb-hover: rgba(255, 255, 255, 0.2);
+    --scroll-thumb: rgba(179, 167, 162, 0.15);
+    --scroll-thumb-hover: rgba(179, 167, 162, 0.25);
     --deny-bg: rgba(255, 255, 255, 0.05);
-    --deny-color: #e4e4e7;
+    --deny-color: #f5ede6;
     --deny-border: rgba(255, 255, 255, 0.1);
     --deny-hover-bg: rgba(255, 255, 255, 0.1);
     --deny-hover-border: rgba(255, 255, 255, 0.15);
     --sug-bg: rgba(255, 255, 255, 0.03);
-    --sug-color: #a1a1aa;
+    --sug-color: #b3a7a2;
     --sug-border: rgba(255, 255, 255, 0.06);
     --sug-hover-bg: rgba(255, 255, 255, 0.08);
     --sug-hover-border: rgba(255, 255, 255, 0.15);
-    --sug-hover-color: #e4e4e7;
-    --sug-arrow: #d4d4d8;
+    --sug-hover-color: #f5ede6;
+    --sug-arrow: #807570;
   }
 }
 
@@ -63,7 +65,7 @@ html, body {
   background: transparent;
   overflow: hidden;
   user-select: none;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 body { padding: 6px; }

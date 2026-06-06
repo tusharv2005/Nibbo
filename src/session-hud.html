@@ -2,32 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'self'; img-src 'self' data: file:;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; img-src 'self' data: file:;">
 <title>Session HUD</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap');
+
 * { box-sizing: border-box; }
 
 :root {
-  --hud-bg: rgba(255, 255, 255, 0.88);
-  --hud-border: rgba(0, 0, 0, 0.12);
-  --text: #242427;
-  --text-muted: #6b6b70;
-  --shadow: rgba(0, 0, 0, 0.16);
-  --running: #16a34a;
-  --done: #2563eb;
+  --hud-bg: rgba(252, 251, 249, 0.9);
+  --hud-border: rgba(112, 99, 97, 0.15);
+  --text: #2d2524;
+  --text-muted: #706361;
+  --shadow: rgba(0, 0, 0, 0.08);
+  --running: #2f9e44;
+  --done: #2b6cb0;
   --interrupted: #d97706;
-  --idle: #9ca3af;
+  --idle: #807570;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --hud-bg: rgba(32, 32, 36, 0.88);
-    --hud-border: rgba(255, 255, 255, 0.12);
-    --text: #f4f4f5;
-    --text-muted: #a1a1aa;
-    --shadow: rgba(0, 0, 0, 0.34);
+    --hud-bg: rgba(35, 31, 30, 0.95);
+    --hud-border: rgba(179, 167, 162, 0.18);
+    --text: #f5ede6;
+    --text-muted: #b3a7a2;
+    --shadow: rgba(0, 0, 0, 0.25);
     --done: #60a5fa;
-    --idle: #71717a;
+    --idle: #807570;
   }
 }
 
@@ -36,7 +38,7 @@ html, body {
   margin: 0;
   background: transparent;
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, Helvetica, Arial, sans-serif;
   font-size: 12px;
   -webkit-font-smoothing: antialiased;
   user-select: none;
@@ -53,6 +55,8 @@ body { padding: 2px 3px 8px; }
   border: 1px solid var(--hud-border);
   border-radius: 8px;
   background: var(--hud-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 8px 18px -12px var(--shadow), 0 2px 4px rgba(0, 0, 0, 0.10);
   overflow: hidden;
   position: relative;

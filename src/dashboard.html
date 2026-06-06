@@ -2,46 +2,52 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'self'; img-src 'self' data: file:">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' https://fonts.googleapis.com; script-src 'self'; img-src 'self' data: file:">
 <title>Sessions</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap');
+
 * { box-sizing: border-box; }
 
 :root {
-  --bg: #f5f5f7;
+  --bg: #fcfbf9;
   --surface: #ffffff;
-  --surface-alt: #ececef;
-  --text: #18181b;
-  --muted: #6b6b70;
-  --subtle: #9b9ba0;
-  --border: rgba(0, 0, 0, 0.08);
-  --row-border: rgba(0, 0, 0, 0.06);
-  --accent: #d97757;
-  --accent-hover: #c4684a;
-  --running: #16803c;
-  --done: #2563eb;
-  --interrupted: #b45309;
-  --idle: #71717a;
-  --scroll-thumb: rgba(0, 0, 0, 0.15);
-  --scroll-thumb-hover: rgba(0, 0, 0, 0.25);
+  --surface-alt: #f5f0e6;
+  --text: #2d2524;
+  --muted: #706361;
+  --subtle: #9e908e;
+  --border: rgba(112, 99, 97, 0.12);
+  --row-border: rgba(112, 99, 97, 0.08);
+  --accent: #e07a5f;
+  --accent-hover: #f4a261;
+  --accent-rgb: 224, 122, 95;
+  --running: #2f9e44;
+  --done: #2b6cb0;
+  --interrupted: #d97706;
+  --idle: #807570;
+  --scroll-thumb: rgba(112, 99, 97, 0.2);
+  --scroll-thumb-hover: rgba(112, 99, 97, 0.35);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1c1c1f;
-    --surface: #232327;
-    --surface-alt: #18181b;
-    --text: #f4f4f5;
-    --muted: #a1a1aa;
-    --subtle: #71717a;
-    --border: rgba(255, 255, 255, 0.08);
-    --row-border: rgba(255, 255, 255, 0.06);
-    --running: #22c55e;
+    --bg: #1a1615;
+    --surface: #231f1e;
+    --surface-alt: #151211;
+    --text: #f5ede6;
+    --muted: #b3a7a2;
+    --subtle: #807570;
+    --border: rgba(179, 167, 162, 0.15);
+    --row-border: rgba(179, 167, 162, 0.09);
+    --accent: #e07a5f;
+    --accent-hover: #f4a261;
+    --accent-rgb: 224, 122, 95;
+    --running: #2f9e44;
     --done: #60a5fa;
-    --interrupted: #f59e0b;
-    --idle: #a1a1aa;
-    --scroll-thumb: rgba(255, 255, 255, 0.1);
-    --scroll-thumb-hover: rgba(255, 255, 255, 0.2);
+    --interrupted: #d97706;
+    --idle: #807570;
+    --scroll-thumb: rgba(179, 167, 162, 0.15);
+    --scroll-thumb-hover: rgba(179, 167, 162, 0.25);
   }
 }
 
@@ -50,7 +56,7 @@ html, body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, Helvetica, Arial, sans-serif;
   font-size: 13px;
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
@@ -138,8 +144,16 @@ h1 {
   min-height: 86px;
   padding: 12px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 12px;
   background: var(--surface);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 6px 18px rgba(var(--accent-rgb), 0.06);
+  transform: translateY(-1px);
 }
 
 .session-id-badge {
@@ -255,7 +269,9 @@ h1 {
 .mark-read-button {
   background: var(--surface-alt);
   color: var(--text);
-  border-color: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
 
 .mark-read-button:hover:not(:disabled) {
@@ -268,17 +284,19 @@ button {
   min-width: 82px;
   height: 30px;
   border: 1px solid transparent;
-  border-radius: 7px;
+  border-radius: 8px;
   background: var(--accent);
   color: #ffffff;
   font: inherit;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  padding: 0 10px;
+  padding: 0 12px;
+  transition: background-color 0.15s ease, transform 0.1s ease;
 }
 
 button:hover:not(:disabled) { background: var(--accent-hover); }
+button:active:not(:disabled) { transform: scale(0.97); }
 button:disabled {
   cursor: default;
   opacity: 0.45;

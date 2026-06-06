@@ -71,7 +71,7 @@ html, body {
 .sidebar {
   width: 200px;
   flex-shrink: 0;
-  background: var(--sidebar-bg);
+  background: linear-gradient(180deg, var(--sidebar-bg) 0%, var(--bg) 100%);
   border-right: 1px solid var(--border);
   padding: 16px 8px;
   overflow-y: auto;
@@ -91,17 +91,28 @@ html, body {
   cursor: pointer;
   color: var(--text-secondary);
   font-weight: 600;
-  transition: background 0.12s ease, color 0.12s ease, transform 0.12s ease, padding 0.15s ease;
+  transition: background 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+              color 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+              padding-left 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .sidebar-item:hover:not(.disabled) {
   background: var(--sidebar-hover);
-  transform: translateX(2px);
+  transform: translateX(3px);
+  color: var(--text-primary);
+}
+.sidebar-item:hover:not(.disabled) .sidebar-item-icon svg {
+  transform: scale(1.1);
+  color: var(--accent);
 }
 .sidebar-item.active {
-  background: var(--sidebar-active);
+  background: linear-gradient(135deg, var(--sidebar-active) 0%, rgba(var(--accent-rgb), 0.08) 100%);
   color: var(--sidebar-active-text);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04), inset 3px 0 0 var(--accent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), inset 3px 0 0 var(--accent);
   padding-left: 16px;
+}
+.sidebar-item-icon svg {
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 .sidebar-item.disabled {
   cursor: default;
@@ -129,8 +140,16 @@ html, body {
   letter-spacing: 0.04em;
 }
 .doctor-indicator {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   border: 1px solid var(--border);
+  background: var(--panel-bg);
+  border-radius: 12px;
+  padding: 10px 12px;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.doctor-indicator:hover:not(.disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(var(--accent-rgb), 0.3);
   background: var(--panel-bg);
 }
 .doctor-indicator,
@@ -144,6 +163,18 @@ html, body {
   --doctor-critical: #dc2626;
   --doctor-critical-strong: #b91c1c;
   --doctor-critical-rgb: 220, 38, 38;
+}
+.doctor-indicator.pass {
+  border-color: rgba(47, 158, 68, 0.25);
+  background: rgba(47, 158, 68, 0.04);
+}
+.doctor-indicator.warning {
+  border-color: rgba(217, 119, 6, 0.25);
+  background: rgba(217, 119, 6, 0.04);
+}
+.doctor-indicator.critical {
+  border-color: rgba(220, 38, 38, 0.25);
+  background: rgba(220, 38, 38, 0.04);
 }
 .doctor-indicator-dot,
 .doctor-overall-dot,
@@ -167,10 +198,18 @@ html, body {
 .doctor-check-row.critical .doctor-check-dot,
 .doctor-connection-panel.critical .doctor-check-dot { background: var(--doctor-critical); }
 .doctor-indicator-status {
-  font-size: 10px;
-  color: var(--text-tertiary);
-  font-weight: 600;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: #fff;
+  letter-spacing: 0.04em;
 }
+.doctor-indicator.pass .doctor-indicator-status { background: var(--doctor-pass); }
+.doctor-indicator.warning .doctor-indicator-status { background: var(--doctor-warning); }
+.doctor-indicator.critical .doctor-indicator-status { background: var(--doctor-critical); }
+.doctor-indicator.unknown .doctor-indicator-status { background: var(--text-tertiary); }
 @media (prefers-color-scheme: dark) {
   .sidebar-item-soon { background: rgba(255, 255, 255, 0.08); }
 }
@@ -178,7 +217,7 @@ html, body {
 /* ── Content panel ── */
 .content {
   flex: 1;
-  background: var(--panel-bg);
+  background: var(--bg);
   overflow-y: auto;
   padding: 28px 36px;
 }
@@ -231,22 +270,27 @@ html, body {
   background: transparent;
 }
 .row:first-child {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 .row:last-child {
   border-bottom: none;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 .section-rows {
-  background: var(--bg);
-  border-radius: 10px;
+  background: var(--panel-bg);
+  border-radius: 12px;
   border: 1px solid var(--border);
   overflow: hidden;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+  transition: box-shadow 0.2s ease;
 }
 @media (prefers-color-scheme: dark) {
-  .section-rows { background: var(--bg); }
+  .section-rows {
+    background: var(--panel-bg);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.25), 0 2px 6px -1px rgba(0, 0, 0, 0.15);
+  }
 }
 .collapsible-group {
   display: flex;
@@ -754,19 +798,20 @@ html, body {
 .hardware-buddy-text-input {
   width: 100%;
   box-sizing: border-box;
-  height: 32px;
+  height: 34px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--panel-bg);
   color: var(--text-primary);
   font: inherit;
-  font-size: 12px;
-  padding: 0 9px;
+  font-size: 13px;
+  padding: 0 12px;
   outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 .hardware-buddy-text-input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.16);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15);
 }
 .hardware-buddy-text-input.pending {
   cursor: wait;
@@ -3197,21 +3242,22 @@ html, body {
 .remote-ssh-field input[type="password"],
 .remote-ssh-field input[type="number"],
 .remote-ssh-field select {
-  padding: 8px 10px;
+  padding: 8px 12px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--panel-bg);
   color: var(--text-primary);
   font-size: 13px;
   font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 .remote-ssh-field input[type="text"]:focus,
 .remote-ssh-field input[type="password"]:focus,
 .remote-ssh-field input[type="number"]:focus,
 .remote-ssh-field select:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15);
 }
 .remote-ssh-field-hint {
   font-size: 11px;
@@ -3478,18 +3524,19 @@ html, body {
   flex: 1 1 220px;
   min-width: 0;
   box-sizing: border-box;
-  padding: 8px 10px;
+  padding: 8px 12px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--panel-bg);
   color: var(--text-primary);
   font-size: 13px;
   font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 .tg-approval-input:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15);
 }
 .tg-approval-output-select {
   min-width: 180px;

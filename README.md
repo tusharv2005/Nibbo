@@ -1,104 +1,85 @@
 <p align="center">
-  <img src="assets/tray-icon.png" width="128" alt="Clawd">
+  <img src="assets/tray-icon.png" width="128" alt="Nibbo">
 </p>
 <h1 align="center">Nibbo</h1>
+
 <p align="center">
-  <a href="README.zh-CN.md">中文版</a>
-  ·
-  <a href="README.zh-TW.md">繁體中文</a>
-  ·
-  <a href="README.ko-KR.md">한국어</a>
-  ·
-  <a href="README.ja-JP.md">日本語</a>
-</p>
-<p align="center">
-  <sub>🌏 Don't see your language? <a href="https://github.com/rullerzhou-afk/nibbo/pulls">Open a PR</a> to add one — Español, Français, Deutsch, etc. all welcome.</sub>
-</p>
-<p align="center">
-  <a href="https://github.com/rullerzhou-afk/nibbo/releases"><img src="https://img.shields.io/github/v/release/rullerzhou-afk/nibbo" alt="Version"></a>
+  <a href="https://github.com/tusharv2005/Nibbo/releases"><img src="https://img.shields.io/github/v/release/tusharv2005/Nibbo" alt="Version"></a>
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey" alt="Platform">
-</p>
-<p align="center">
-  <a href="https://github.com/rullerzhou-afk/nibbo/stargazers"><img src="https://img.shields.io/github/stars/rullerzhou-afk/nibbo?style=flat&logo=github&color=yellow" alt="Stars"></a>
+  <a href="https://github.com/tusharv2005/Nibbo/stargazers"><img src="https://img.shields.io/github/stars/tusharv2005/Nibbo?style=flat&logo=github&color=yellow" alt="Stars"></a>
   <a href="https://github.com/hesreallyhim/awesome-claude-code"><img src="https://awesome.re/mentioned-badge-flat.svg" alt="Mentioned in Awesome Claude Code"></a>
 </p>
 
 <p align="center">
-  <img src="assets/hero.gif" alt="Nibbo — a pixel desktop pet that reacts to your AI coding agent in real time. Animated demo: the crab cycles through sleeping, thinking while the model reads the codebase, typing as edit/bash tools run, grooving for one subagent, juggling when multiple subagents run, raising a permission bubble, and celebrating when 14 files / 312 tests are complete. Works with Claude Code, Codex, Cursor, Copilot, Gemini, Antigravity, Qwen, Pi, OpenClaw and more.">
+  <img src="assets/hero.gif" alt="Nibbo — a pixel desktop pet that reacts to your AI coding agent in real time. Animated demo: the pet cycles through sleeping, thinking while the model reads the codebase, typing as edit/bash tools run, grooving for one subagent, juggling when multiple subagents run, raising a permission bubble, and celebrating when 14 files / 312 tests are complete. Works with Claude Code, Codex, Cursor, Copilot, Gemini, Antigravity, Qwen, Pi, OpenClaw and more.">
 </p>
 
-Clawd lives on your desktop and reacts to what your AI coding agent is doing — in real time. Start a long task, walk away, come back when the crab tells you it's done.
+Nibbo is a premium, real-time desktop companion that visualizes what your AI coding agents are doing. Start a long task, walk away, and look back at your screen to see if Nibbo is thinking, working, or celebrating a completed task.
 
-Thinking when you prompt, typing when tools run, grooving or juggling for subagents, reviewing permissions, celebrating when tasks complete, sleeping when you step away. Ships with three built-in themes: **Clawd** (pixel crab), **Calico** (三花猫), and **Cloudling** (云宝), with full support for custom themes and imported Codex Pet animation packs.
+Nibbo features rich, cozy visuals and real-time state animations—thinking when your agent is prompted, typing when it executes tools, grooving or juggling for subagents, prompting you with custom desktop permission bubbles, and falling asleep when the desk is quiet. 
 
-> Supports Windows 11, macOS, and Ubuntu/Linux. Windows releases provide separate x64 and ARM64 installers. Source builds require Node.js. Works with **Claude Code**, **Codex CLI**, **Copilot CLI**, **Gemini CLI**, **Antigravity CLI (agy)**, **Cursor Agent**, **CodeBuddy**, **Kiro CLI**, **Kimi Code CLI (Kimi-CLI)**, **Qwen Code**, **opencode**, **Pi**, **OpenClaw**, and **Hermes Agent**.
+It comes with four built-in themes: **Clawd** (pixel crab), **Calico** (cozy tortoiseshell cat), **Cloudling** (fluffy cloud), and **Dewdrop** (green slime sprout), with full support for custom themes and imported Codex Pet animation packs.
 
-## Features
+> Works with **Claude Code**, **Codex CLI**, **Copilot CLI**, **Gemini CLI**, **Antigravity CLI (agy)**, **Cursor Agent**, **CodeBuddy**, **Kiro CLI**, **Kimi Code CLI (Kimi-CLI)**, **Qwen Code**, **opencode**, **Pi**, **OpenClaw**, and **Hermes Agent**. Fully compatible with Windows 11, macOS, and Ubuntu/Linux.
 
-### Multi-Agent Support
-- **Claude Code** — full integration via command hooks + HTTP permission hooks
-- **Codex CLI** — official hooks with JSONL fallback (`~/.codex/sessions/`), registered automatically with real permission bubbles
-- **Copilot CLI** — command hooks via `~/.copilot/hooks/hooks.json`
-- **Gemini CLI** — command hooks via `~/.gemini/settings.json` (registered automatically when Clawd starts, or run `npm run install:gemini-hooks`)
-- **Antigravity CLI (agy)** — command hooks via `~/.gemini/config/hooks.json` (registered automatically when Antigravity config exists, or run `npm run install:antigravity-hooks`); **state-only**: Clawd never pops a permission bubble for agy. Every Allow / Deny / Always-allow choice happens in agy's own terminal menu
-- **Cursor Agent** — [Cursor IDE hooks](https://cursor.com/docs/agent/hooks) in `~/.cursor/hooks.json` (registered automatically when Clawd starts, or run `npm run install:cursor-hooks`)
-- **CodeBuddy** — Claude Code-compatible command hooks + HTTP permission hooks via `~/.codebuddy/settings.json` (registered automatically when Clawd starts, or run `node hooks/codebuddy-install.js`)
-- **Kiro CLI** — command hooks injected into custom agent configs under `~/.kiro/agents/`, plus an auto-created `clawd` agent that is re-synced from Kiro's built-in `kiro_default` whenever Clawd starts, so you can opt into hooks with minimal behavior drift via `kiro-cli --agent clawd` or `/agent swap clawd` (registered automatically when Clawd starts, or run `npm run install:kiro-hooks`). State hooks are verified on macOS and Windows.
-- **Kimi Code CLI (Kimi-CLI)** — command hooks via `~/.kimi/config.toml` (`[[hooks]]` entries) (registered automatically when Clawd starts, or run `npm run install:kimi-hooks`)
-- **Qwen Code** — command hooks via `~/.qwen/settings.json` (registered automatically when Clawd starts, or run `npm run install:qwen-hooks`); state tracking and Qwen `PermissionRequest` desktop approval bubbles are supported
-- **opencode** — [plugin integration](https://opencode.ai/docs/plugins) via `~/.config/opencode/opencode.json` (registered automatically when Clawd starts); zero-latency event streaming, permission bubbles with Allow/Always/Deny, and building animations when parallel subagents are spawned via the `task` tool
-- **Pi** — global extension via `~/.pi/agent/extensions/nibbo` (registered automatically when Clawd starts, or run `npm run install:pi-extension`); state-only interactive lifecycle and tool activity updates while preserving Pi's default YOLO behavior
-- **OpenClaw** — state-only plugin integration via `~/.openclaw/openclaw.json` (registered automatically when an OpenClaw config already exists, or run `npm run install:openclaw-plugin`); local `openclaw tui --local` sessions drive Clawd animations, without permission bubbles or terminal focus in Phase 1
-- **Hermes Agent** — [plugin integration](https://hermes-agent.org/) via Hermes' managed plugin directory (registered automatically when Hermes is installed, or run `npm run install:hermes-plugin`); state, sessions, SessionEnd, and terminal focus are supported
-- **Multi-agent coexistence** — run all agents simultaneously; Clawd tracks each session independently
+---
 
-### Animations & Interaction
-- **Real-time state awareness** — agent hooks and log polling drive Clawd's animations automatically
-- **12 animated states** — idle, thinking, typing, building, subagent groove, multi-subagent juggling, error, happy, notification, sweeping, carrying, sleeping
-- **Codex Pet imports** — import Codex Pet zip packages from `Settings…` → `Theme`; Clawd adapts their atlas animations into managed themes
-- **Eye tracking** — Clawd follows your cursor in idle state, with body lean and shadow stretch
-- **Sleep sequence** — yawning, dozing, collapsing, sleeping after 60s idle; mouse movement triggers a startled wake-up animation
-- **Click reactions** — double-click for a poke, 4 clicks for a flail
-- **Drag from any state** — grab Clawd anytime (Pointer Capture prevents fast-flick drops), release to resume
-- **Mini mode** — drag to right edge or right-click "Mini Mode"; Clawd hides at screen edge with peek-on-hover, mini alerts/celebrations, and parabolic jump transitions
+## Key Features
 
-### Permission Bubble
-- **In-app permission review** — when Claude Code, Codex CLI, CodeBuddy, or opencode request supported tool permissions, Clawd pops a floating bubble card instead of waiting in the terminal
-- **Allow / deny / agent-native extras** — one-click approve or reject, plus permission rules / `Always` actions when the source agent supports them
-- **Global hotkeys** — `Ctrl+Shift+Y` to Allow, `Ctrl+Shift+N` to Deny the latest permission bubble (only registered while bubbles are visible)
-- **Stacking layout** — multiple permission requests stack upward from the bottom-right corner
-- **Auto-dismiss** — if you answer in the terminal first, the bubble disappears automatically
-- **Per-agent toggle** — open `Settings…` → `Agents`, pick an agent, and turn off `Show pop-up bubbles` to keep prompts in that agent's own terminal/TUI
+### 🔌 Multi-Agent Integrations
+- **Claude Code** — Seamless integration via native command hooks and custom HTTP permission hooks.
+- **Codex CLI** — Official hook system with JSONL fallback (`~/.codex/sessions/`), registered automatically with custom permission bubbles.
+- **Copilot CLI** — Command hooks integrated via `~/.copilot/hooks/hooks.json`.
+- **Gemini CLI** — Command hooks via `~/.gemini/settings.json` (auto-registered, or run `npm run install:gemini-hooks`).
+- **Antigravity CLI (agy)** — Integrated via `~/.gemini/config/hooks.json` (auto-registered, or run `npm run install:antigravity-hooks`). Note: State-only integration; all Allow/Deny decisions remain inside agy's native terminal menu.
+- **Cursor Agent** — [Cursor IDE hooks](https://cursor.com/docs/agent/hooks) in `~/.cursor/hooks.json` (auto-registered, or run `npm run install:cursor-hooks`).
+- **CodeBuddy** — Claude Code-compatible command and HTTP permission hooks via `~/.codebuddy/settings.json` (auto-registered, or run `node hooks/codebuddy-install.js`).
+- **Kiro CLI** — Command hooks injected into agent configurations under `~/.kiro/agents/`, plus an auto-created `nibbo` agent synced from Kiro's default config.
+- **Kimi Code CLI (Kimi-CLI)** — Command hooks configured via `~/.kimi/config.toml` (`[[hooks]]` entries) (auto-registered, or run `npm run install:kimi-hooks`).
+- **Qwen Code** — Command hooks via `~/.qwen/settings.json` (auto-registered, or run `npm run install:qwen-hooks`), supporting state tracking and desktop approval bubbles.
+- **opencode** — [Plugin integration](https://opencode.ai/docs/plugins) via `~/.config/opencode/opencode.json` (auto-registered) with zero-latency event streaming and permission bubbles.
+- **Pi** — Global extension via `~/.pi/agent/extensions/nibbo` (auto-registered, or run `npm run install:pi-extension`).
+- **OpenClaw** — State-only plugin integration via `~/.openclaw/openclaw.json` (auto-registered when OpenClaw config exists).
+- **Hermes Agent** — [Plugin integration](https://hermes-agent.org/) via the managed plugin directory (auto-registered, or run `npm run install:hermes-plugin`).
+- **Coexistence Mode** — Run multiple agents simultaneously; Nibbo monitors and aggregates session state priorities seamlessly.
 
-### Session Intelligence
-- **Multi-session tracking** — sessions across all agents resolve to the highest-priority state
-- **Subagent awareness** — headphones groove for 1 subagent, three-ball juggling for 2+
-- **Sessions dashboard + HUD** — right-click or tray → `Open Dashboard` to inspect live sessions, recent events, aliases, and jump to a terminal; a compact HUD near Clawd keeps current live sessions visible
-- **Terminal focus** — Dashboard/HUD actions jump to a specific session's terminal window; notification/attention states auto-focus the relevant terminal
-- **Process liveness detection** — detects crashed/exited supported agent processes and cleans up orphan sessions
-- **Startup recovery** — if Clawd restarts while any supported agent is still running, it stays awake instead of falling asleep
+### 🎭 Animations & Customization
+- **12 Animated States** — Idle, thinking, typing, building, subagent groove, multi-subagent juggling, error, happy, notification, sweeping, carrying, and sleeping.
+- **Eye Tracking & Physics** — Nibbo's eyes track your cursor in the idle state, accompanied by a dynamic body lean and shadow stretch.
+- **Sleep Sequence** — Cycles through yawning, dozing, collapsing, and sleeping after 60s of inactivity; wakes up with a startled wake-up animation upon mouse movement.
+- **Click & Interaction Physics** — Double-click to poke the pet, click four times for a flail reaction, and drag-and-drop from any state with pointer capture.
+- **Mini Mode** — Drag Nibbo to the right screen edge or right-click to enter Mini Mode. The pet tucks away at the screen border, peeking on hover and executing parabolic jump transitions.
+- **Codex Pet Imports** — Easily import Codex Pet zip packages from `Settings` → `Theme`. Nibbo dynamically maps their atlas animations into managed themes.
 
-### System
-- **Click-through** — transparent areas pass clicks to windows below; only Clawd's body is interactive
-- **Position memory** — Clawd remembers where you left it across restarts (including mini mode)
-- **Single instance lock** — prevents duplicate Clawd windows
-- **Auto-start** — Claude Code's SessionStart hook can launch Clawd automatically if it's not running
-- **Do Not Disturb** — right-click or tray menu to enter sleep mode; all hook events are silenced until you wake Clawd. Permission bubbles are suppressed during DND — Codex and opencode fall back to their native prompts, while Claude Code and CodeBuddy fall back to their built-in permission flow. Antigravity and Pi are state-only integrations.
-- **Sound effects** — short audio cues on task completion and permission requests (toggle via right-click menu; 10s cooldown, auto-muted during DND)
-- **System tray** — resize (S/M/L), DND mode, language switch, auto-start, check for updates
-- **i18n** — English, Simplified Chinese, Traditional Chinese, Korean, and Japanese UI; switch via right-click menu or tray
-- **Auto-update** — checks GitHub releases; Windows installs NSIS updates on quit, macOS/Linux `git pull` + restart when running from a cloned repo
+### 🛡️ Smart Desktop Permission Bubbles
+- **Interactive Prompts** — When supported agents request file edits or command executions, Nibbo displays a floating bubble card on your desktop so you don't have to watch the terminal.
+- **Quick Actions** — Approve, deny, or configure permanent rules (`Always`) in a single click.
+- **Keyboard Shortcuts** — Use `Ctrl+Shift+Y` to Allow and `Ctrl+Shift+N` to Deny active permission bubbles.
+- **Smart Stacking & Sync** — Prompts stack cleanly upward from the bottom-right corner and dismiss automatically if answered inside the terminal first.
+
+### 📊 Session Dashboard & HUD
+- **Real-Time Monitoring** — Open the Sessions History Dashboard to view active sessions, past tool runs, logs, and system commands.
+- **Session HUD** — A glassmorphic overlay containing current session states, times elapsed, and subagent processes.
+- **Terminal Focus** — Click on any session in the HUD or Dashboard to instantly focus that agent's terminal window.
+
+### ⚙️ System Features
+- **Click-Through Transparency** — Transparent window areas pass clicks straight to the workspace below; only the pet's body registers inputs.
+- **Auto-Start & Memory** — Nibbo remembers its coordinates across restarts and can launch automatically when a supported agent session starts.
+- **Do Not Disturb (DND)** — Silences sound effects and suppresses permission bubbles (allowing agents to fall back to their native terminal prompts).
+- **Sound Design** — Subtle audio alerts for task completions and permission cues (includes a 10s cooldown and auto-mute in DND).
+
+---
 
 ## Animations
 
 <table>
   <tr>
-    <td align="center"><img src="assets/gif/clawd-idle.gif" width="100"><br><sub>Idle</sub></td>
-    <td align="center"><img src="assets/gif/clawd-thinking.gif" width="100"><br><sub>Thought Bubble</sub></td>
-    <td align="center"><img src="assets/gif/clawd-typing.gif" width="100"><br><sub>Typing</sub></td>
-    <td align="center"><img src="assets/gif/clawd-building.gif" width="100"><br><sub>Building</sub></td>
-    <td align="center"><img src="assets/gif/clawd-headphones-groove.gif" width="100"><br><sub>1 Subagent</sub></td>
-    <td align="center"><img src="assets/gif/clawd-juggling.gif" width="100"><br><sub>2+ Subagents</sub></td>
+    <td align="center"><img src="assets/gif/clawd-idle.gif" width="100"><br><sub>Clawd Idle</sub></td>
+    <td align="center"><img src="assets/gif/clawd-thinking.gif" width="100"><br><sub>Clawd Thinking</sub></td>
+    <td align="center"><img src="assets/gif/clawd-typing.gif" width="100"><br><sub>Clawd Typing</sub></td>
+    <td align="center"><img src="assets/gif/clawd-building.gif" width="100"><br><sub>Clawd Building</sub></td>
+    <td align="center"><img src="assets/gif/clawd-headphones-groove.gif" width="100"><br><sub>Clawd 1 Subagent</sub></td>
+    <td align="center"><img src="assets/gif/clawd-juggling.gif" width="100"><br><sub>Clawd 2+ Subagents</sub></td>
   </tr>
   <tr>
     <td align="center"><img src="assets/gif/calico-idle.gif" width="80"><br><sub>Calico Idle</sub></td>
@@ -116,89 +97,65 @@ Thinking when you prompt, typing when tools run, grooving or juggling for subage
     <td align="center"><img src="assets/gif/cloudling-juggling.gif" width="120"><br><sub>Cloudling Juggling</sub></td>
     <td align="center"><img src="assets/gif/cloudling-conducting.gif" width="120"><br><sub>Cloudling Conducting</sub></td>
   </tr>
+  <tr>
+    <td align="center"><img src="themes/dewdrop/assets/codex-pet-idle-loop.svg" width="90"><br><sub>Dewdrop Idle</sub></td>
+    <td align="center"><img src="themes/dewdrop/assets/codex-pet-review-loop.svg" width="90"><br><sub>Dewdrop Thinking</sub></td>
+    <td align="center"><img src="themes/dewdrop/assets/codex-pet-running-loop.svg" width="90"><br><sub>Dewdrop Typing</sub></td>
+    <td align="center"><img src="themes/dewdrop/assets/codex-pet-running-loop.svg" width="90"><br><sub>Dewdrop Building</sub></td>
+    <td align="center"><img src="themes/dewdrop/assets/codex-pet-waving-loop.svg" width="90"><br><sub>Dewdrop Groove</sub></td>
+    <td align="center"><img src="themes/dewdrop/assets/codex-pet-waiting-loop.svg" width="90"><br><sub>Dewdrop Alert</sub></td>
+  </tr>
 </table>
 
-Full event-to-state mapping, mini mode, and click reactions: **[docs/guides/state-mapping.md](docs/guides/state-mapping.md)**
+For the full state mapping guides and interaction physics, see **[docs/guides/state-mapping.md](docs/guides/state-mapping.md)**.
 
-## Multi-display
-
-Clawd adapts to multi-monitor setups: proportional sizing uses the display Clawd launches on, portrait monitors get a bounded boost so the pet stays readable on tall narrow screens, and you can drag Clawd across displays.
-
-<p align="center"><sub>Want to see the real multi-monitor behavior? <a href="assets/videos/clawd-multi-monitor-demo.mp4">Watch the demo video in this repository</a>.</sub></p>
+---
 
 ## Quick Start
 
-For normal use, download the latest prebuilt installer from **[GitHub Releases](https://github.com/rullerzhou-afk/nibbo/releases/latest)**:
+Download the latest prebuilt installer from **[GitHub Releases](https://github.com/tusharv2005/Nibbo/releases/latest)**:
 
 - **Windows**: `Nibbo-Setup-<version>-x64.exe` or `Nibbo-Setup-<version>-arm64.exe`
-- **macOS**: `.dmg`
+- **macOS**: `.dmg` (supports Apple Silicon and Intel)
 - **Linux**: `.AppImage` or `.deb`
 
-Launch Clawd after installing it; supported agent hooks/plugins are synced automatically on startup.
+Launch Nibbo after installation; active agent hooks are configured automatically.
 
-Run from source only if you're contributing, testing unreleased code, or debugging integrations. Source installs download Electron/build tooling and can create a large `node_modules` tree.
+### Running from Source
+Run from source to test unreleased integrations or contribute to the project:
 
 ```bash
-# Clone the repo
-git clone https://github.com/rullerzhou-afk/nibbo.git
-cd nibbo
+# Clone the repository
+git clone https://github.com/tusharv2005/Nibbo.git
+cd Nibbo
 
-# Install dependencies
+# Install Node.js dependencies
 npm install
 
-# Start Clawd (auto-registers Claude Code hooks on launch)
+# Start the Nibbo Electron application
 npm start
 ```
 
-**Claude Code**, **Codex CLI**, and **Copilot CLI** work out of the box with auto-registered hooks. **Gemini CLI**, **Antigravity CLI (agy)**, **Cursor Agent**, **CodeBuddy**, **Kiro CLI**, **Kimi Code CLI (Kimi-CLI)**, **Qwen Code**, **opencode**, **Pi**, **OpenClaw**, and **Hermes Agent** auto-register when Clawd launches (if they're installed; OpenClaw also needs an initialized config). Also covers remote SSH, WSL, and platform-specific notes (macOS / Linux): **[docs/guides/setup-guide.md](docs/guides/setup-guide.md)**
+For advanced setups including Remote SSH servers, Windows Subsystem for Linux (WSL), and platform-specific guides, see **[docs/guides/setup-guide.md](docs/guides/setup-guide.md)** and **[docs/guides/guide-remote-ssh.md](docs/guides/guide-remote-ssh.md)**.
 
-Want to run Claude Code / Codex CLI on a remote server and surface state plus permission bubbles in your local Clawd? Use the in-app **Settings → Remote SSH → One-click deploy**. Full walkthrough, Doctor boundary, and FAQ: **[docs/guides/guide-remote-ssh.md](docs/guides/guide-remote-ssh.md)**
+---
 
-For the official `Codex + WSL` status, Clawd's current implementation boundary, and why this is easy to misread, see: **[docs/guides/codex-wsl-clarification.md](docs/guides/codex-wsl-clarification.md)**
+## Creating Custom Themes
 
-## Known Limitations
-
-Some agents have feature gaps (no permission bubble, polling latency, no terminal focus). See the full table: **[docs/guides/known-limitations.md](docs/guides/known-limitations.md)**
-
-## Custom Themes
-
-Clawd supports custom themes — replace the default crab with your own character and animations. If you already have a Codex Pet package, import its zip from `Settings…` → `Theme` → `Import pet zip`; Clawd turns the atlas into a managed theme automatically.
-
-**Quick start:**
-1. Scaffold a theme:
+Nibbo supports custom pet formats. You can create your own character or import packages from **Codex Pet**:
+1. Open `Settings` → `Theme` → `Import pet zip` and select any Codex Pet package.
+2. To scaffold a theme from scratch, run:
    ```bash
-   node scripts/create-theme.js my-theme
-   # or
-   npm run create-theme -- my-theme
+   npm run create-theme -- my-custom-theme
    ```
-   No argument also works: it creates the next available `my-theme` scaffold in your user themes directory.
-2. Edit `theme.json` and create your assets (SVG, GIF, APNG, WebP, PNG, JPG, or JPEG)
-3. Restart Clawd or open `Settings…` → `Theme` → select your theme
+3. Edit `theme.json` and add your assets (supports SVGs, GIFs, WebPs, APNGs, and PNGs).
+4. For detailed field mappings, read the **[docs/guides/guide-theme-creation.md](docs/guides/guide-theme-creation.md)**.
 
-**Minimum viable theme:** 1 SVG (idle with eye tracking) + 7 GIF/APNG files (thinking, working, error, happy, notification, sleeping, waking). Eye tracking can be disabled to use any format for all states.
-
-Validate your theme before distributing:
-```bash
-node scripts/validate-theme.js path/to/your-theme
-```
-
-Theme cards in `Settings…` → `Theme` now expose capability badges such as `Tracked idle`, `Static theme`, `Mini`, `Direct sleep`, and `No reactions`, so users can tell what a theme supports before switching.
-
-See [docs/guides/guide-theme-creation.md](docs/guides/guide-theme-creation.md) for the full creation guide with tiered paths (beginner → advanced), `theme.json` field reference, and asset guidelines.
-
-> Third-party SVG files are automatically sanitized for security.
-
-### Roadmap
-
-Some things we'd like to explore in the future:
-
-- Codex terminal focus via process tree lookup from `codex.exe` PID
-- Theme registry and in-app download
-- Hook uninstall script for clean app removal
+---
 
 ## Contributing
 
-Nibbo is a community-driven project. Bug reports, feature ideas, and pull requests are all welcome — open an [issue](https://github.com/tusharv2005/Nibbo/issues) to discuss or submit a PR directly.
+Nibbo is community-driven. Bug reports, feature suggestions, and pull requests are highly appreciated. Feel free to open an [issue](https://github.com/tusharv2005/Nibbo/issues) or submit a PR.
 
 ### Maintainers & Contributors
 
@@ -208,20 +165,13 @@ Nibbo is a community-driven project. Bug reports, feature ideas, and pull reques
   </tr>
 </table>
 
-## Acknowledgments
-
-- Clawd pixel art reference from [clawd-tank](https://github.com/marciogranzotto/clawd-tank) by [@marciogranzotto](https://github.com/marciogranzotto)
-- Shared on [LINUX DO](https://linux.do/) community
+---
 
 ## License
 
 Source code is licensed under the [GNU Affero General Public License v3.0](LICENSE) (AGPL-3.0).
 
-**Artwork and bundled theme assets (including `assets/` and `themes/*/assets/`) are NOT covered by AGPL-3.0.** All rights reserved by their respective copyright holders. See [assets/LICENSE](assets/LICENSE) and the notices below for details.
-
-- **Clawd** character is the property of [Anthropic](https://www.anthropic.com). This is an unofficial fan project, not affiliated with or endorsed by Anthropic.
-- **Calico cat (三花猫)** artwork by 鹿鹿 ([@rullerzhou-afk](https://github.com/rullerzhou-afk)). All rights reserved.
-- **Cloudling (云宝)** artwork by 鹿鹿 ([@rullerzhou-afk](https://github.com/rullerzhou-afk)). All rights reserved. Cloudling's visual direction includes an homage to the OpenAI Codex logo; Codex/OpenAI marks remain the property of OpenAI, and this project is not affiliated with or endorsed by OpenAI.
-- **Third-party contributions**: copyright retained by respective artists.
-
-**No cryptocurrency.** This project has no token, coin, NFT, or airdrop, and is not affiliated with any cryptocurrency project.
+**Artwork and bundled theme assets (inside `assets/` and `themes/*/assets/`) are not covered by AGPL-3.0.** All rights reserved by the original creators. See [assets/LICENSE](assets/LICENSE) for details.
+- **Clawd** theme artwork inspired by Anthropic.
+- **Calico** and **Cloudling** artwork by 鹿鹿 ([@rullerzhou-afk](https://github.com/rullerzhou-afk)).
+- **Dewdrop** theme assets.
