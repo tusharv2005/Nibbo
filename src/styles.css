@@ -1,0 +1,195 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Seam clip layer — wraps #pet-container so the multi-monitor seam
+   clip-path is applied in screen space. #pet-container itself carries
+   transform: scaleX(-1) in left-edge mini mode, which would mirror a
+   clip-path applied directly to it; this outer layer is never flipped. */
+#pet-clip {
+  width: 100%;
+  height: 100%;
+}
+
+#pet-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  position: relative;
+  overflow: hidden;
+}
+
+#pet-container.dragging {
+  cursor: grabbing;
+}
+
+#nibbo, .nibbo-img {
+  width: 190%;
+  height: 130%;
+  position: absolute;
+  left: -45%;
+  top: -25%;
+  pointer-events: none;
+}
+
+#pet-container.mini-left {
+  transform: scaleX(-1);
+}
+
+#pet-container.overheat #nibbo,
+#pet-container.overheat .nibbo-img {
+  filter: url(#overheat-red);
+}
+
+/* Pixel Toilet Paper Roll */
+#paper-roll {
+  display: none;
+  position: absolute;
+  bottom: 8px; /* place near the base of the pet */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 40px; /* extends down when unrolled */
+  pointer-events: none;
+  z-index: 9;
+}
+
+#pet-container.scrolling-paper #paper-roll {
+  display: block;
+}
+
+#paper-roll .roll {
+  position: absolute;
+  top: 0;
+  left: 4px;
+  width: 16px;
+  height: 12px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: inset -3px -2px 0px #e0e0e0;
+  border-radius: 2px;
+}
+
+#paper-roll .roll::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  width: 3px;
+  height: 4px;
+  background: #5d4037;
+  border-radius: 50%;
+}
+
+#paper-roll .paper {
+  position: absolute;
+  top: 11px;
+  left: 5px;
+  width: 12px;
+  height: 0px;
+  background: #ffffff;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+  border-bottom: 1px dashed #bdbdbd;
+  opacity: 0;
+  transform-origin: top center;
+}
+
+#pet-container.scrolling-paper #paper-roll .roll {
+  animation: roll-wiggle 0.5s infinite alternate;
+}
+
+#pet-container.scrolling-paper #paper-roll .paper {
+  animation: paper-unroll 2s forwards, paper-wiggle 0.5s infinite alternate;
+}
+
+@keyframes roll-wiggle {
+  0% { transform: rotate(-5deg); }
+  100% { transform: rotate(5deg); }
+}
+
+@keyframes paper-unroll {
+  0% { height: 0px; opacity: 0; }
+  15% { height: 8px; opacity: 1; }
+  50% { height: 24px; opacity: 1; }
+  90% { height: 24px; opacity: 1; }
+  100% { height: 24px; opacity: 0; }
+}
+
+@keyframes paper-wiggle {
+  0% { transform: skewX(-4deg); }
+  100% { transform: skewX(4deg); }
+}
+
+/* Steam Puffs */
+.steam-puffs {
+  display: none;
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 30px;
+  pointer-events: none;
+  z-index: 11;
+}
+
+#pet-container.overheat .steam-puffs {
+  display: block;
+}
+
+.steam-puff {
+  position: absolute;
+  bottom: 0;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.steam-1 {
+  left: 8px;
+  animation: puff-rise 1.5s infinite 0s linear;
+}
+.steam-2 {
+  left: 18px;
+  animation: puff-rise 1.5s infinite 0.5s linear;
+}
+.steam-3 {
+  left: 28px;
+  animation: puff-rise 1.5s infinite 1.0s linear;
+}
+
+@keyframes puff-rise {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-15px) scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-30px) scale(0.2);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "nibbo",
+  "name": "Nibbo",
+  "description": "Forward OpenClaw lifecycle and tool-state events to Nibbo.",
+  "activation": {
+    "onStartup": true
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}

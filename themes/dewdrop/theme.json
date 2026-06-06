@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "name": "Dewdrop",
+  "version": "1.0.0",
+  "description": "A green slime sprout pet with a cheerful face.",
+  "preview": "preview.webp",
+  "viewBox": {
+    "x": 0,
+    "y": 0,
+    "width": 192,
+    "height": 208
+  },
+  "layout": {
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 192,
+      "height": 208
+    }
+  },
+  "source": {
+    "type": "codex-pet",
+    "id": "dewdrop",
+    "displayName": "Dewdrop",
+    "packagePath": "/Users/tusharvarshney/Library/Application Support/OpenPets/pets/dewdrop",
+    "spritesheetPath": "spritesheet.webp",
+    "adapterVersion": 3
+  },
+  "eyeTracking": {
+    "enabled": false,
+    "states": []
+  },
+  "rendering": {
+    "svgChannel": "object"
+  },
+  "states": {
+    "idle": [
+      "codex-pet-idle-loop.svg"
+    ],
+    "yawning": [
+      "codex-pet-waving-loop.svg"
+    ],
+    "dozing": [
+      "codex-pet-waiting-loop.svg"
+    ],
+    "collapsing": [
+      "codex-pet-idle-static.svg"
+    ],
+    "thinking": [
+      "codex-pet-review-loop.svg"
+    ],
+    "working": [
+      "codex-pet-running-loop.svg"
+    ],
+    "juggling": [
+      "codex-pet-running-loop.svg"
+    ],
+    "sweeping": [
+      "codex-pet-waving-loop.svg"
+    ],
+    "error": [
+      "codex-pet-failed-loop.svg"
+    ],
+    "attention": [
+      "codex-pet-jumping-loop.svg"
+    ],
+    "notification": [
+      "codex-pet-waiting-loop.svg"
+    ],
+    "carrying": [
+      "codex-pet-running-loop.svg"
+    ],
+    "sleeping": [
+      "codex-pet-idle-static.svg"
+    ],
+    "waking": [
+      "codex-pet-idle-loop.svg"
+    ]
+  },
+  "workingTiers": [
+    {
+      "minSessions": 3,
+      "file": "codex-pet-running-loop.svg"
+    },
+    {
+      "minSessions": 2,
+      "file": "codex-pet-running-loop.svg"
+    },
+    {
+      "minSessions": 1,
+      "file": "codex-pet-running-loop.svg"
+    }
+  ],
+  "jugglingTiers": [
+    {
+      "minSessions": 2,
+      "file": "codex-pet-running-loop.svg"
+    },
+    {
+      "minSessions": 1,
+      "file": "codex-pet-running-loop.svg"
+    }
+  ],
+  "idleAnimations": [
+    {
+      "file": "codex-pet-waving-loop.svg",
+      "duration": 5000
+    },
+    {
+      "file": "codex-pet-waiting-loop.svg",
+      "duration": 5000
+    },
+    {
+      "file": "codex-pet-review-loop.svg",
+      "duration": 5000
+    }
+  ],
+  "displayHintMap": {
+    "clawd-working-building.svg": "codex-pet-running-loop.svg",
+    "clawd-working-typing.svg": "codex-pet-running-loop.svg",
+    "clawd-headphones-groove.svg": "codex-pet-running-loop.svg",
+    "clawd-working-juggling.svg": "codex-pet-running-loop.svg",
+    "clawd-working-conducting.svg": "codex-pet-running-loop.svg",
+    "clawd-idle-reading.svg": "codex-pet-review-loop.svg",
+    "clawd-idle-bubble.svg": "codex-pet-waving-loop.svg",
+    "clawd-working-debugger.svg": "codex-pet-review-loop.svg",
+    "clawd-working-thinking.svg": "codex-pet-review-loop.svg"
+  },
+  "hitBoxes": {
+    "default": {
+      "x": 0,
+      "y": 0,
+      "w": 192,
+      "h": 208
+    },
+    "sleeping": {
+      "x": 0,
+      "y": 0,
+      "w": 192,
+      "h": 208
+    },
+    "wide": {
+      "x": 0,
+      "y": 0,
+      "w": 192,
+      "h": 208
+    }
+  },
+  "reactions": {
+    "drag": {
+      "file": "codex-pet-running-loop.svg",
+      "fileLeft": "codex-pet-running-left-loop.svg",
+      "fileRight": "codex-pet-running-right-loop.svg"
+    },
+    "clickLeft": {
+      "file": "codex-pet-jumping-once.svg",
+      "duration": 840
+    },
+    "clickRight": {
+      "file": "codex-pet-jumping-once.svg",
+      "duration": 840
+    },
+    "annoyed": {
+      "file": "codex-pet-failed-loop.svg",
+      "duration": 2000
+    },
+    "double": {
+      "files": [
+        "codex-pet-waving-once.svg"
+      ],
+      "duration": 700
+    }
+  },
+  "miniMode": {
+    "supported": true,
+    "states": {
+      "mini-idle": [
+        "codex-pet-idle-loop.svg"
+      ],
+      "mini-alert": [
+        "codex-pet-waiting-loop.svg"
+      ],
+      "mini-happy": [
+        "codex-pet-waving-loop.svg"
+      ],
+      "mini-enter": [
+        "codex-pet-jumping-loop.svg"
+      ],
+      "mini-peek": [
+        "codex-pet-waiting-loop.svg"
+      ],
+      "mini-working": [
+        "codex-pet-running-loop.svg"
+      ],
+      "mini-crabwalk": [
+        "codex-pet-running-loop.svg"
+      ],
+      "mini-enter-sleep": [
+        "codex-pet-idle-static.svg"
+      ],
+      "mini-sleep": [
+        "codex-pet-idle-static.svg"
+      ]
+    }
+  }
+}

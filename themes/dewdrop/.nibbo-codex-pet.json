@@ -1,0 +1,14 @@
+{
+  "managedBy": "nibbo",
+  "kind": "codex-pet-theme",
+  "schemaVersion": 1,
+  "adapterVersion": 3,
+  "generatedThemeId": "dewdrop",
+  "sourcePetId": "dewdrop",
+  "sourcePackagePath": "/Users/tusharvarshney/Library/Application Support/OpenPets/pets/dewdrop",
+  "sourcePetJsonMtimeMs": 1780674148826.0764,
+  "sourcePetJsonSize": 183,
+  "sourceSpritesheetPath": "spritesheet.webp",
+  "sourceSpritesheetMtimeMs": 1780674148824.6277,
+  "sourceSpritesheetSize": 1825346
+}

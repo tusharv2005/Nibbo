@@ -1,0 +1,224 @@
+"use strict";
+
+const test = require("node:test");
+const assert = require("node:assert");
+
+const themeOverrideCommands = require("../src/settings-actions-theme-overrides");
+
+test("settings theme override actions expose the command surface", () => {
+  assert.deepStrictEqual(Object.keys(themeOverrideCommands).sort(), [
+    "ANIMATION_OVERRIDES_EXPORT_VERSION",
+    "ONESHOT_OVERRIDE_STATES",
+    "importAnimationOverrides",
+    "resetThemeOverrides",
+    "setAnimationOverride",
+    "setSoundOverride",
+    "setThemeOverrideDisabled",
+    "setWideHitboxOverride",
+  ]);
+  assert.strictEqual(themeOverrideCommands.ANIMATION_OVERRIDES_EXPORT_VERSION, 1);
+  assert.ok(themeOverrideCommands.ONESHOT_OVERRIDE_STATES.has("attention"));
+});
+
+test("settings theme override actions update an active state slot with explicit reload data", () => {
+  const calls = [];
+  const snapshot = {
+    theme: "nibbo",
+    themeOverrides: {
+      nibbo: {
+        hitbox: { wide: { "old.svg": true } },
+        sounds: { complete: { file: "done.mp3" } },
+      },
+    },
+  };
+
+  const result = themeOverrideCommands.setAnimationOverride(
+    {
+      themeId: "nibbo",
+      slotType: "state",
+      stateKey: "attention",
+      file: "new-attention.svg",
+      transition: { in: 80, out: 120 },
+      autoReturnMs: 2500,
+    },
+    {
+      snapshot,
+      activateTheme: (themeId, variantId, overrideMap) => {
+        calls.push({ themeId, variantId, overrideMap });
+      },
+    }
+  );
+
+  assert.strictEqual(result.status, "ok");
+  assert.deepStrictEqual(result.commit.themeOverrides.nibbo.states.attention, {
+    file: "new-attention.svg",
+    transition: { in: 80, out: 120 },
+  });
+  assert.deepStrictEqual(result.commit.themeOverrides.nibbo.timings, {
+    autoReturn: { attention: 2500 },
+  });
+  assert.deepStrictEqual(result.commit.themeOverrides.nibbo.hitbox, snapshot.themeOverrides.nibbo.hitbox);
+  assert.deepStrictEqual(result.commit.themeOverrides.nibbo.sounds, snapshot.themeOverrides.nibbo.sounds);
+  assert.deepStrictEqual(calls, [
+    {
+      themeId: "nibbo",
+      variantId: null,
+      overrideMap: result.commit.themeOverrides.nibbo,
+    },
+  ]);
+});
+
+test("settings theme override actions clear transition overrides that match the theme default", () => {
+  const calls = [];
+  const snapshot = {
+    theme: "nibbo",
+    themeOverrides: {
+      nibbo: {
+        states: {
+          thinking: {
+            transition: { in: 160, out: 150 },
+          },
+        },
+      },
+    },
+  };
+
+  const result = themeOverrideCommands.setAnimationOverride(
+    {
+      themeId: "nibbo",
+      slotType: "state",
+      stateKey: "thinking",
+      transition: { in: 150, out: 150 },
+      transitionThemeDefault: { in: 150, out: 150 },
+    },
+    {
+      snapshot,
+      activateTheme: (themeId, variantId, overrideMap) => {
+        calls.push({ themeId, variantId, overrideMap });
+      },
+    }
+  );
+
+  assert.strictEqual(result.status, "ok");
+  assert.strictEqual(result.commit.themeOverrides.nibbo, undefined);
+  assert.deepStrictEqual(calls, [
+    {
+      themeId: "nibbo",
+      variantId: null,
+      overrideMap: {},
+    },
+  ]);
+});
+
+test("settings theme override actions keep transition overrides that differ from the theme default", () => {
+  const result = themeOverrideCommands.setAnimationOverride(
+    {
+      themeId: "nibbo",
+      slotType: "state",
+      stateKey: "thinking",
+      transition: { in: 160, out: 150 },
+      transitionThemeDefault: { in: 150, out: 150 },
+    },
+    {
+      snapshot: { theme: "other", themeOverrides: {} },
+      activateTheme: () => {
+        throw new Error("inactive theme should not reload");
+      },
+    }
+  );
+
+  assert.strictEqual(result.status, "ok");
+  assert.deepStrictEqual(result.commit.themeOverrides.nibbo.states.thinking, {
+    transition: { in: 160, out: 150 },
+  });
+});
+
+test("settings theme override actions preserve animation and hitbox data when changing sound overrides", () => {
+  const snapshot = {
+    theme: "calico",
+    themeOverrides: {
+      nibbo: {
+        states: { attention: { file: "attention.svg" } },
+        reactions: { clickLeft: { file: "click.svg" } },
+        hitbox: { wide: { "wide.svg": true } },
+        sounds: { confirm: { file: "confirm.wav" } },
+      },
+    },
+  };
+
+  const result = themeOverrideCommands.setSoundOverride(
+    { themeId: "nibbo", soundName: "complete", file: "complete.mp3", originalName: "picked.mp3" },
+    {
+      snapshot,
+      activateTheme: () => {
+        throw new Error("inactive theme should not reload");
+      },
+    }
+  );
+
+  assert.strictEqual(result.status, "ok");
+  assert.deepStrictEqual(result.commit.themeOverrides.nibbo.states, snapshot.themeOverrides.nibbo.states);
+  assert.deepStrictEqual(result.commit.themeOverrides.nibbo.reactions, snapshot.themeOverrides.nibbo.reactions);
+  assert.deepStrictEqual(result.commit.themeOverrides.nibbo.hitbox, snapshot.themeOverrides.nibbo.hitbox);
+  assert.deepStrictEqual(result.commit.themeOverrides.nibbo.sounds, {
+    confirm: { file: "confirm.wav" },
+    complete: { file: "complete.mp3", originalName: "picked.mp3" },
+  });
+});
+
+test("settings theme override actions import active theme overrides with the committed map", () => {
+  const calls = [];
+  const payload = {
+    version: 1,
+    themes: {
+      nibbo: {
+        states: {
+          attention: { disabled: true },
+        },
+      },
+    },
+  };
+  const snapshot = { theme: "nibbo", themeOverrides: {} };
+
+  const result = themeOverrideCommands.importAnimationOverrides(payload, {
+    snapshot,
+    activateTheme: (themeId, variantId, overrideMap) => {
+      calls.push({ themeId, variantId, overrideMap });
+    },
+  });
+
+  assert.strictEqual(result.status, "ok");
+  assert.strictEqual(result.importedThemeCount, 1);
+  assert.deepStrictEqual(calls, [
+    {
+      themeId: "nibbo",
+      variantId: null,
+      overrideMap: result.commit.themeOverrides.nibbo,
+    },
+  ]);
+});
+
+test("settings theme override actions reset an active theme by reloading without overrides", () => {
+  const calls = [];
+  const snapshot = {
+    theme: "nibbo",
+    themeOverrides: {
+      nibbo: { states: { attention: { disabled: true } } },
+      calico: { states: { error: { disabled: true } } },
+    },
+  };
+
+  const result = themeOverrideCommands.resetThemeOverrides("nibbo", {
+    snapshot,
+    activateTheme: (themeId, variantId, overrideMap) => {
+      calls.push({ themeId, variantId, overrideMap });
+    },
+  });
+
+  assert.strictEqual(result.status, "ok");
+  assert.strictEqual(result.commit.themeOverrides.nibbo, undefined);
+  assert.ok(result.commit.themeOverrides.calico);
+  assert.deepStrictEqual(calls, [
+    { themeId: "nibbo", variantId: null, overrideMap: null },
+  ]);
+});
