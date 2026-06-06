@@ -1,6 +1,17 @@
 const { app, BrowserWindow, screen, ipcMain, globalShortcut, nativeTheme, dialog, shell, nativeImage, powerSaveBlocker, clipboard } = require("electron");
 const path = require("path");
 const fs = require("fs");
+
+process.on("uncaughtException", (err) => {
+  try {
+    fs.writeFileSync(path.join(require("os").homedir(), "nibbo-crash.log"), "Uncaught Exception:\n" + (err && err.stack || String(err)));
+  } catch {}
+});
+process.on("unhandledRejection", (err) => {
+  try {
+    fs.writeFileSync(path.join(require("os").homedir(), "nibbo-crash.log"), "Unhandled Rejection:\n" + (err && err.stack || String(err)));
+  } catch {}
+});
 const { EventEmitter } = require("events");
 const {
   applyWindowsAppUserModelId,
@@ -3256,7 +3267,8 @@ if (!gotTheLock) {
       const CFMachPortCreateRunLoopSource = cf.func("void * CFMachPortCreateRunLoopSource(void *allocator, void *port, long index)");
       const CFRunLoopGetCurrent = cf.func("void * CFRunLoopGetCurrent()");
       const CFRunLoopAddSource = cf.func("void CFRunLoopAddSource(void *rl, void *source, void *mode)");
-      const kCFRunLoopCommonModes = cf.symbol("kCFRunLoopCommonModes", "void *");
+      const kCFRunLoopCommonModesSymbol = cf.symbol("kCFRunLoopCommonModes", "void *");
+      const kCFRunLoopCommonModes = koffi.decode(kCFRunLoopCommonModesSymbol, "void *");
 
       let lastScrollTime = 0;
       const SCROLL_COOLDOWN_MS = 3000;
@@ -3307,7 +3319,8 @@ if (!gotTheLock) {
         const CFRunLoopGetCurrent = cf.func("void * CFRunLoopGetCurrent()");
         const CFRunLoopRemoveSource = cf.func("void CFRunLoopRemoveSource(void *rl, void *source, void *mode)");
         const CFRelease = cf.func("void CFRelease(void *obj)");
-        const kCFRunLoopCommonModes = cf.symbol("kCFRunLoopCommonModes", "void *");
+        const kCFRunLoopCommonModesSymbol = cf.symbol("kCFRunLoopCommonModes", "void *");
+        const kCFRunLoopCommonModes = koffi.decode(kCFRunLoopCommonModesSymbol, "void *");
         
         const rl = CFRunLoopGetCurrent();
         CFRunLoopRemoveSource(rl, scrollEventTapSource, kCFRunLoopCommonModes);
