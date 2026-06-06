@@ -98,12 +98,12 @@ It comes with four built-in themes: **Clawd** (pixel crab), **Calico** (cozy tor
     <td align="center"><img src="assets/gif/cloudling-conducting.gif" width="120"><br><sub>Cloudling Conducting</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="themes/dewdrop/assets/codex-pet-idle-loop.svg" width="90"><br><sub>Dewdrop Idle</sub></td>
-    <td align="center"><img src="themes/dewdrop/assets/codex-pet-review-loop.svg" width="90"><br><sub>Dewdrop Thinking</sub></td>
-    <td align="center"><img src="themes/dewdrop/assets/codex-pet-running-loop.svg" width="90"><br><sub>Dewdrop Typing</sub></td>
-    <td align="center"><img src="themes/dewdrop/assets/codex-pet-running-loop.svg" width="90"><br><sub>Dewdrop Building</sub></td>
-    <td align="center"><img src="themes/dewdrop/assets/codex-pet-waving-loop.svg" width="90"><br><sub>Dewdrop Groove</sub></td>
-    <td align="center"><img src="themes/dewdrop/assets/codex-pet-waiting-loop.svg" width="90"><br><sub>Dewdrop Alert</sub></td>
+    <td align="center"><img src="assets/gif/dewdrop-idle.gif" width="90"><br><sub>Dewdrop Idle</sub></td>
+    <td align="center"><img src="assets/gif/dewdrop-thinking.gif" width="90"><br><sub>Dewdrop Thinking</sub></td>
+    <td align="center"><img src="assets/gif/dewdrop-typing.gif" width="90"><br><sub>Dewdrop Typing</sub></td>
+    <td align="center"><img src="assets/gif/dewdrop-building.gif" width="90"><br><sub>Dewdrop Building</sub></td>
+    <td align="center"><img src="assets/gif/dewdrop-headphones-groove.gif" width="90"><br><sub>Dewdrop Groove</sub></td>
+    <td align="center"><img src="assets/gif/dewdrop-waiting.gif" width="90"><br><sub>Dewdrop Alert</sub></td>
   </tr>
 </table>
 
